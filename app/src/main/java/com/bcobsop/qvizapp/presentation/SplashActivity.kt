@@ -1,9 +1,8 @@
-package com.bcobsop.qvizapp
+package com.bcobsop.qvizapp.presentation
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.model.QuestionsHolder
 import com.bcobsop.qvizapp.utils.FBDBWorker
@@ -19,7 +18,6 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
         //loadQuestions()
         //spitQuestions()
         QuestionsBinder.getQuestions()
-        Log.e("LOL", QuestionsBinder.getQuestions().listQuestions[2].quest)
     }
 
     private fun splitQuestions() {
