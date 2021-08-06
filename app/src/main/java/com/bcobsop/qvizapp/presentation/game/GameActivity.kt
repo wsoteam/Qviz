@@ -35,7 +35,11 @@ class GameActivity : AppCompatActivity(R.layout.game_activity) {
     }
 
     private fun refreshUI(question: Question) {
-        rvAnswers.adapter = AnswerAdapter(question)
+        rvAnswers.adapter = AnswerAdapter(question, object : AnswerCallback{
+            override fun answered(isRightAnswer: Boolean) {
+
+            }
+        })
         tvQuest.text = question.quest
         tvNumber.text = "Question ${question.currentNumber + 1}"
     }
