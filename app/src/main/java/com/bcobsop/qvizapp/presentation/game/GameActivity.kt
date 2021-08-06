@@ -12,14 +12,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.presentation.game.controller.AnswerAdapter
+import com.bcobsop.qvizapp.presentation.game.dialogs.DefeatDialog
 import kotlinx.android.synthetic.main.game_activity.*
 
-class GameActivity : AppCompatActivity(R.layout.game_activity) {
+class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Callbacks {
 
     private lateinit var vm: GameVM
     private lateinit var lifesList: ArrayList<ImageView>
     private var countDownTimer: CountDownTimer? = null
 
+
+    override fun exit() {
+        finish()
+    }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
@@ -56,12 +61,8 @@ class GameActivity : AppCompatActivity(R.layout.game_activity) {
             0 -> ivFirstLife.visibility = View.INVISIBLE
         }
         if (it <= 0) {
-            endGame()
+            DefeatDialog().show(supportFragmentManager, "")
         }
-    }
-
-    private fun endGame() {
-        Toast.makeText(this, "LOL", Toast.LENGTH_LONG).show()
     }
 
 

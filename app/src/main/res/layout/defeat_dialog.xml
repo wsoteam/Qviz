@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99a6a6a6">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="12dp"
+        android:elevation="2dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="#216cc2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="72dp"
+                android:fontFamily="@font/bubblegumsans_regular"
+                android:textStyle="normal"
+                android:textSize="41.7sp"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal"
+                android:text="Defeat!"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
+                android:textSize="23sp"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:text="Better luck next time!"/>
+
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textStyle="normal"
+                android:textSize="21sp"
+                android:textColor="#000000"
+                android:text="Back to menu"
+                android:textAllCaps="false"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="33dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/menu_btn_shape"
+                android:paddingStart="71dp"
+                android:paddingEnd="71dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"/>
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
