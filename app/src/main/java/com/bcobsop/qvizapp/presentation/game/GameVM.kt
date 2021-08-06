@@ -12,6 +12,7 @@ class GameVM(application: Application) : AndroidViewModel(application) {
 
     private var money: MutableLiveData<Int>? = null
     private var quest: MutableLiveData<Question>? = null
+    private var lifes: MutableLiveData<Int>? = null
 
     private var questionsHolder: QuestionsHolder? = null
     private var currentIndex = 0
@@ -23,6 +24,18 @@ class GameVM(application: Application) : AndroidViewModel(application) {
             bindMoney()
         }
         return money!!
+    }
+
+    fun getLifes(): MutableLiveData<Int> {
+        if (lifes == null) {
+            lifes = MutableLiveData()
+            bindLifes()
+        }
+        return lifes!!
+    }
+
+    private fun bindLifes() {
+        lifes!!.value = 2
     }
 
 
@@ -56,4 +69,22 @@ class GameVM(application: Application) : AndroidViewModel(application) {
             questionsHolder = QuestionsBinder.getQuestions()
         }
     }
+
+    fun getNextQuestion(isAnswerRight : Boolean){
+        if (isAnswerRight){
+            PreferenceProvider.money = PreferenceProvider.money + 100
+        }else{
+            if (PreferenceProvider.money > 0) {
+                PreferenceProvider.money = PreferenceProvider.money - 100
+            }
+            var newValue = lifes!!.value as Int
+            newValue --
+            lifes!!.value = newValue
+        }
+
+        refreshQuest()
+        bindMoney()
+    }
+
+
 }
