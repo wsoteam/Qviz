@@ -18,7 +18,27 @@ class AnswerVH(layoutInflater: LayoutInflater, viewGroup: ViewGroup, val clickAn
         clickAnswer.clickAnswer(adapterPosition)
     }
 
-    fun bind(answer: String) {
+    fun bind(answer: String, state : Int) {
         itemView.tvText.text = answer
+        when(state){
+            RIGHT_ANSWER -> {
+                itemView.ivBack.setImageResource(R.color.right)
+                itemView.tvText.setTextColor(itemView.resources.getColor(R.color.textColorAnswer))
+            }
+            BAD_ANSWER -> {
+                itemView.ivBack.setImageResource(R.color.bad)
+                itemView.tvText.setTextColor(itemView.resources.getColor(R.color.textColorAnswer))
+            }
+            else -> {
+                itemView.ivBack.setImageResource(R.color.start)
+                itemView.tvText.setTextColor(itemView.resources.getColor(R.color.textColorDef))
+            }
+        }
+    }
+
+    companion object{
+        const val RIGHT_ANSWER = 1
+        const val BAD_ANSWER = 0
+        const val DEFAULT_ANSWER = -1
     }
 }

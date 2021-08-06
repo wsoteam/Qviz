@@ -9,8 +9,8 @@ import com.bcobsop.qvizapp.presentation.game.AnswerCallback
 class AnswerAdapter(val question: Question, val answerCallback: AnswerCallback) : RecyclerView.Adapter<AnswerVH>() {
 
     private var listAnswers: ArrayList<String> = arrayListOf()
-    private var badAnswer = -1
-    private var rightAnswer = -1
+    private var badAnswerIndex = -1
+    private var rightAnswerIndex = -1
 
     init {
         listAnswers.add(question.answer)
@@ -33,25 +33,41 @@ class AnswerAdapter(val question: Question, val answerCallback: AnswerCallback) 
         var isAnsweredRight = question.answer == listAnswers[position]
         answerCallback.answered(isAnsweredRight)
 
-        if (isAnsweredRight){
-            rightAnswer = getRightAnswerPosition()
-        }else{
+        rightAnswerIndex = getRightAnswerPosition()
 
+        if (!isAnsweredRight) {
+            badAnswerIndex = position
         }
+
+        notifyDataSetChanged()
     }
 
     private fun getRightAnswerPosition(): Int {
         var position = 0
-        for(answer in listAnswers){
-            if (answer == question.answer){
-                position
+        for(i in listAnswers.indices){
+            if (listAnswers[i] == question.answer){
+                position = i
             }
         }
         return position
     }
 
     override fun onBindViewHolder(holder: AnswerVH, position: Int) {
-        holder.bind(listAnswers[position])
+        holder.bind(listAnswers[position], getState(position))
+    }
+
+    private fun getState(position: Int): Int {
+        return when (position) {
+            rightAnswerIndex -> {
+                AnswerVH.RIGHT_ANSWER
+            }
+            badAnswerIndex -> {
+                AnswerVH.BAD_ANSWER
+            }
+            else -> {
+                AnswerVH.DEFAULT_ANSWER
+            }
+        }
     }
 
     override fun getItemCount(): Int {
