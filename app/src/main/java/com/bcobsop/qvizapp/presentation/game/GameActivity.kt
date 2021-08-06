@@ -13,9 +13,10 @@ import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.presentation.game.controller.AnswerAdapter
 import com.bcobsop.qvizapp.presentation.game.dialogs.DefeatDialog
+import com.bcobsop.qvizapp.presentation.game.dialogs.WinDialog
 import kotlinx.android.synthetic.main.game_activity.*
 
-class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Callbacks {
+class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Callbacks, WinDialog.Callbacks {
 
     private lateinit var vm: GameVM
     private lateinit var lifesList: ArrayList<ImageView>
@@ -23,6 +24,10 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
 
 
     override fun exit() {
+        finish()
+    }
+
+    override fun win() {
         finish()
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,18 +32,22 @@
                 android:textSize="41.7sp"
                 android:textColor="#ffffff"
                 android:gravity="center_horizontal"
-                android:text="Defeat!"/>
+                android:text="Congrats!"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvScore"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto_bold"
+                android:layout_gravity="center_horizontal"
                 android:textStyle="normal"
                 android:textSize="23sp"
                 android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="7dp"
-                android:text="Better luck next time!"/>
+                android:drawableStart="@drawable/ic_money"
+                android:drawablePadding="12dp"
+                tools:text="2302"/>
 
             <Button
                 android:id="@+id/btnClose"
