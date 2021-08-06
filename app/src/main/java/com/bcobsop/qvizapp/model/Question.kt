@@ -7,5 +7,6 @@ data class Question(
     var answer: String,
     var firstBadAnswer: String,
     var secondBadAnswer: String,
-    var thirdBadAnswer: String
+    var thirdBadAnswer: String,
+    var currentNumber : Int = 0
 ) : Serializable

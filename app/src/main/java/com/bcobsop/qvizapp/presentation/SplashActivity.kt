@@ -1,10 +1,12 @@
 package com.bcobsop.qvizapp.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.model.QuestionsHolder
+import com.bcobsop.qvizapp.presentation.menu.MenuActivity
 import com.bcobsop.qvizapp.utils.FBDBWorker
 import com.bcobsop.qvizapp.utils.holder.QuestionsBinder
 import kotlin.random.Random
@@ -18,6 +20,12 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
         //loadQuestions()
         //spitQuestions()
         QuestionsBinder.getQuestions()
+        openMenu()
+    }
+
+    private fun openMenu() {
+        startActivity(Intent(this, MenuActivity::class.java))
+        finish()
     }
 
     private fun splitQuestions() {

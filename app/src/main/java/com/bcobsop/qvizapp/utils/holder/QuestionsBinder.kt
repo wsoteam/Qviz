@@ -6,6 +6,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 object QuestionsBinder {
+
     private var list : QuestionsHolder? = null
     
     fun getQuestions() : QuestionsHolder{
@@ -13,6 +14,10 @@ object QuestionsBinder {
             list = loadQuestions()
         }
         return list!!
+    }
+
+    fun shuffle(){
+        list!!.listQuestions = list!!.listQuestions.shuffled()
     }
 
     private fun loadQuestions(): QuestionsHolder? {
