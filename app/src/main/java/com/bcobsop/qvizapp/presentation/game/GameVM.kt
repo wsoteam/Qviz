@@ -35,12 +35,12 @@ class GameVM(application: Application) : AndroidViewModel(application) {
     }
 
     private fun bindLifes() {
-        lifes!!.value = 2
+        lifes!!.value = 3
     }
 
 
     fun getQuest(): MutableLiveData<Question> {
-        if (questionsHolder == null){
+        if (questionsHolder == null) {
             loadQuestions()
         }
         if (quest == null) {
@@ -70,19 +70,24 @@ class GameVM(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getNextQuestion(isAnswerRight : Boolean){
-        if (isAnswerRight){
+    fun getNextQuestion(isAnswerRight: Boolean) {
+        var isGameContinue = true
+        if (isAnswerRight) {
             PreferenceProvider.money = PreferenceProvider.money + 100
-        }else{
+        } else {
             if (PreferenceProvider.money > 0) {
                 PreferenceProvider.money = PreferenceProvider.money - 100
             }
             var newValue = lifes!!.value as Int
-            newValue --
+            newValue--
             lifes!!.value = newValue
+
+            isGameContinue = lifes!!.value as Int > 0
         }
 
-        refreshQuest()
+        if (isGameContinue) {
+            refreshQuest()
+        }
         bindMoney()
     }
 

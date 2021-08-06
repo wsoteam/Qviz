@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -49,9 +50,18 @@ class GameActivity : AppCompatActivity(R.layout.game_activity) {
     }
 
     private fun refreshLifes(it: Int) {
-        for (i in 2 downTo it + 1) {
-            lifesList[i].visibility = View.INVISIBLE
+        when (it) {
+            2 -> ivThirdLife.visibility = View.INVISIBLE
+            1 -> ivSecondLife.visibility = View.INVISIBLE
+            0 -> ivFirstLife.visibility = View.INVISIBLE
         }
+        if (it <= 0) {
+            endGame()
+        }
+    }
+
+    private fun endGame() {
+        Toast.makeText(this, "LOL", Toast.LENGTH_LONG).show()
     }
 
 
