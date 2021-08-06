@@ -9,4 +9,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="Screen" parent="AppTheme">
+        <item name="colorPrimaryDark">#245fa3</item>
+    </style>
 </resources>
