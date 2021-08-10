@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.presentation.game.controller.AnswerAdapter
+import com.bcobsop.qvizapp.presentation.game.controller.progress.ProgressAdapter
 import com.bcobsop.qvizapp.presentation.game.dialogs.DefeatDialog
 import com.bcobsop.qvizapp.presentation.game.dialogs.WinDialog
 import kotlinx.android.synthetic.main.game_activity.*
@@ -21,6 +22,9 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
     private lateinit var vm: GameVM
     private lateinit var lifesList: ArrayList<ImageView>
     private var countDownTimer: CountDownTimer? = null
+    private var progressAdapter : ProgressAdapter? = null
+
+    private val QUESTION_NUMBER = 20
 
 
     override fun exit() {
@@ -36,6 +40,10 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
 
         vm = ViewModelProviders.of(this).get(GameVM::class.java)
         rvAnswers.layoutManager = GridLayoutManager(this, 2)
+        rvProgress.layoutManager = GridLayoutManager(this, QUESTION_NUMBER)
+
+        progressAdapter = ProgressAdapter(QUESTION_NUMBER)
+        rvProgress.adapter = progressAdapter
 
 
         lifesList = arrayListOf()
@@ -77,6 +85,9 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
                 bindAnswer(isRightAnswer)
             }
         })
+
+        progressAdapter!!.updateProgress(question.currentNumber)
+        tvCounter.text = "${question.currentNumber + 1} of ${QUESTION_NUMBER}"
         tvQuest.text = question.quest
         tvNumber.text = "Question ${question.currentNumber + 1}"
     }
