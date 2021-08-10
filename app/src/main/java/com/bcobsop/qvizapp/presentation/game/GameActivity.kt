@@ -25,6 +25,8 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
     private var progressAdapter : ProgressAdapter? = null
 
     private val QUESTION_NUMBER = 20
+    private val WIN_TAG = "WIN_TAG"
+    private val DEFEAT_TAG = "DEFEAT_TAG"
 
 
     override fun exit() {
@@ -74,22 +76,26 @@ class GameActivity : AppCompatActivity(R.layout.game_activity), DefeatDialog.Cal
             0 -> ivFirstLife.visibility = View.INVISIBLE
         }
         if (it <= 0) {
-            DefeatDialog().show(supportFragmentManager, "")
+            DefeatDialog().show(supportFragmentManager, DEFEAT_TAG)
         }
     }
 
 
     private fun refreshUI(question: Question) {
-        rvAnswers.adapter = AnswerAdapter(question, object : AnswerCallback {
-            override fun answered(isRightAnswer: Boolean) {
-                bindAnswer(isRightAnswer)
-            }
-        })
+        if (question.currentNumber >= QUESTION_NUMBER){
+            WinDialog().show(supportFragmentManager, WIN_TAG)
+        }else{
+            rvAnswers.adapter = AnswerAdapter(question, object : AnswerCallback {
+                override fun answered(isRightAnswer: Boolean) {
+                    bindAnswer(isRightAnswer)
+                }
+            })
 
-        progressAdapter!!.updateProgress(question.currentNumber)
-        tvCounter.text = "${question.currentNumber + 1} of ${QUESTION_NUMBER}"
-        tvQuest.text = question.quest
-        tvNumber.text = "Question ${question.currentNumber + 1}"
+            progressAdapter!!.updateProgress(question.currentNumber)
+            tvCounter.text = "${question.currentNumber + 1} of ${QUESTION_NUMBER}"
+            tvQuest.text = question.quest
+            tvNumber.text = "Question ${question.currentNumber + 1}"
+        }
     }
 
     private fun bindAnswer(isRightAnswer: Boolean) {
