@@ -1,31 +1,60 @@
-package com.bcobsop.qvizapp.presentation
+package com.bcobsop.qvizapp.presentation.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bcobsop.qvizapp.R
 import com.bcobsop.qvizapp.model.Question
 import com.bcobsop.qvizapp.model.QuestionsHolder
 import com.bcobsop.qvizapp.presentation.menu.MenuActivity
+import com.bcobsop.qvizapp.presentation.screen.ScreenActivity
+import com.bcobsop.qvizapp.presentation.screen.ScreenCompanion
 import com.bcobsop.qvizapp.utils.FBDBWorker
+import com.bcobsop.qvizapp.utils.analytics.Analytic
 import com.bcobsop.qvizapp.utils.holder.QuestionsBinder
 import kotlin.random.Random
 
 class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
 
     private var questions = ""
+    private lateinit var vm: SplashVM
+    private var isStartNextScreen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //loadQuestions()
-        //spitQuestions()
+        Analytic.start()
         QuestionsBinder.getQuestions()
-        openMenu()
+        vm = ViewModelProviders.of(this).get(SplashVM::class.java)
+
+        vm.getStatusLD().observe(this, Observer {
+            Analytic.startVM()
+            when (it) {
+                SplashVM.BLACK -> openScreen()
+                SplashVM.WHITE -> openMenu()
+            }
+        })
+
+
     }
 
+
     private fun openMenu() {
-        startActivity(Intent(this, MenuActivity::class.java))
-        finish()
+        if (!isStartNextScreen) {
+            isStartNextScreen = true
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+        }
+    }
+
+
+    private fun openScreen() {
+        if (!isStartNextScreen) {
+            isStartNextScreen = true
+            startActivity(Intent(this, ScreenActivity::class.java))
+            finish()
+        }
     }
 
     private fun splitQuestions() {
@@ -52,7 +81,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
             var endIndex = (i + 1) * 1000
 
             var obj = QuestionsHolder(list.subList(startIndex, endIndex), "$startIndex")
-            FBDBWorker.createNewDirectory(obj, "$startIndex obj")
+            //FBDBWorker.createNewDirectory(obj, "$startIndex obj")
         }
 
     }

@@ -13,4 +13,21 @@
     <style name="Screen" parent="AppTheme">
         <item name="colorPrimaryDark">#245fa3</item>
     </style>
+
+    <style name="Splash" parent="AppTheme">
+        <item name="colorPrimaryDark">#2e76cb</item>
+    </style>
+
+
+
+
+    <style name="SplashActivityStyle" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="PB">
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 </resources>
