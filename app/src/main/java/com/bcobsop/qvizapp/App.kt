@@ -10,7 +10,7 @@ class App : Application() {
         super.onCreate()
         sInstance = this
         Amplitude.getInstance()
-            .initialize(this, "3031a61ead2f7482d87c899794cec751")
+            .initialize(this, "6231950354fe85d672dd2f0b96412472")
             .enableForegroundTracking(this)
     }
 
